@@ -8,11 +8,12 @@ import random
 class Game(pyglet.window.Window):
     def __init__(self):
         super(Game, self).__init__()
+        self.batch = pyglet.graphics.Batch()
         self.paddle_img = utils.load_image("paddle.png")
         self.ball_img = utils.load_image("ball.png")
-        self.player = Entity(self.paddle_img, 20 + self.paddle_img.anchor_x, self.height / 2, 250)
-        self.cpu = Entity(self.paddle_img, self.width - self.paddle_img.anchor_x - 20, self.height / 2, 250)
-        self.ball = Entity(self.ball_img, self.width / 2, self.height / 2, 500)
+        self.player = Entity(self.paddle_img, 20 + self.paddle_img.anchor_x, self.height / 2, 250, self.batch)
+        self.cpu = Entity(self.paddle_img, self.width - self.paddle_img.anchor_x - 20, self.height / 2, 250, self.batch)
+        self.ball = Entity(self.ball_img, self.width / 2, self.height / 2, 500, self.batch)
         self.ball.vx = 300
         self.ball.vy = 300
         self.player_score = 0
@@ -22,19 +23,19 @@ class Game(pyglet.window.Window):
                                               font_size=64,
                                               x=self.width / 3,
                                               y=self.height - 50,
-                                              anchor_x='center', anchor_y='center')
+                                              anchor_x='center', anchor_y='center', batch=self.batch)
         self.colon = pyglet.text.Label(":",
                                        font_name='Ubuntu',
                                        font_size=64,
                                        x=self.width / 2,
                                        y=self.height - 40,
-                                       anchor_x='center', anchor_y='center')
+                                       anchor_x='center', anchor_y='center', batch=self.batch)
         self.cpu_label = pyglet.text.Label(str(self.cpu_score),
                                            font_name='Ubuntu',
                                            font_size=64,
                                            x=2 * self.width / 3,
                                            y=self.height - 50,
-                                           anchor_x='center', anchor_y='center')
+                                           anchor_x='center', anchor_y='center', batch=self.batch)
         self.pause_label = pyglet.text.Label("pause",
                                              font_name='Ubuntu',
                                              font_size=64,
@@ -57,12 +58,7 @@ class Game(pyglet.window.Window):
 
     def on_draw(self):
         self.clear()
-        self.player.draw()
-        self.cpu.draw()
-        self.ball.draw()
-        self.player_label.draw()
-        self.cpu_label.draw()
-        self.colon.draw()
+        self.batch.draw()
         if self.paused:
             self.pause_label.draw()
 
