@@ -30,9 +30,9 @@ class Entity:
         #     self.vx -= self.speed
 
     def follow(self, x, y):
-        if self.sprite.y + self.sprite.height / 2 < y:
+        if self.sprite.y < y:
             self.vy = self.speed
-        elif self.sprite.y + self.sprite.height / 2 > y:
+        elif self.sprite.y > y:
             self.vy = -self.speed
 
     def update(self, dt):
