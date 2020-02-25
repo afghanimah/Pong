@@ -1,21 +1,20 @@
 import pyglet
 from pyglet.window import key
 from entity import Entity
+import utils
 import random
 
 
 class Game(pyglet.window.Window):
     def __init__(self):
         super(Game, self).__init__()
-        self.images = {
-            "paddle": pyglet.image.load("paddle.png"),
-            "ball": pyglet.image.load("ball.png")
-        }
-        self.player = Entity(self.images.get("paddle"), 20, (self.height - self.images.get("paddle").height) / 2, 250)
-        self.cpu = Entity(self.images.get("paddle"), self.width - self.images.get("paddle").width - 20,
-                          (self.height - self.images.get("paddle").height) / 2, 250)
-        self.ball = Entity(self.images.get("ball"), (self.width - self.images.get("ball").width) / 2,
-                           (self.height - self.images.get("ball").height) / 2, 500)
+        self.paddle_img = utils.load_image("paddle.png")
+        self.ball_img = utils.load_image("ball.png")
+        self.player = Entity(self.paddle_img, 20, (self.height - self.paddle_img.height) / 2, 250)
+        self.cpu = Entity(self.paddle_img, self.width - self.paddle_img.width - 20,
+                          (self.height - self.paddle_img.height) / 2, 250)
+        self.ball = Entity(self.ball_img, (self.width - self.ball_img.width) / 2,
+                           (self.height - self.ball_img.height) / 2, 500)
         self.ball.vx = 300
         self.ball.vy = 300
         self.player_score = 0
@@ -45,8 +44,8 @@ class Game(pyglet.window.Window):
                                              y=self.height / 2,
                                              anchor_x='center', anchor_y='center')
         self.paused = False
-        self.hit_sound = pyglet.media.load("button-10.wav", streaming=False)
-        self.point_sound = pyglet.media.load("point.wav", streaming=False)
+        self.hit_sound = utils.load_sound("button-10.wav", streaming=False)
+        self.point_sound = utils.load_sound("point.wav", streaming=False)
 
     def update(self, dt):
         if self.paused:
@@ -114,16 +113,16 @@ class Game(pyglet.window.Window):
             self.hit_sound.play()
 
         if self.ball.sprite.x < x_min:
-            self.ball.sprite.x = (self.width - self.images.get("ball").width) / 2 - 200
-            self.ball.sprite.y = (self.height - self.images.get("ball").height) / 2
+            self.ball.sprite.x = (self.width - self.ball_img.width) / 2 - 200
+            self.ball.sprite.y = (self.height - self.ball_img.height) / 2
             self.ball.vx = random.randint(300, 350)
             self.ball.vy = random.randint(300, 350) * (-1 if random.randint(0, 1) == 0 else 1)
             self.cpu_score += 1
             self.cpu_label.text = str(self.cpu_score)
             self.point_sound.play()
         elif self.ball.sprite.x > x_max:
-            self.ball.sprite.x = (self.width - self.images.get("ball").width) / 2 + 200
-            self.ball.sprite.y = (self.height - self.images.get("ball").height) / 2
+            self.ball.sprite.x = (self.width - self.ball_img.width) / 2 + 200
+            self.ball.sprite.y = (self.height - self.ball_img.height) / 2
             self.ball.vx = -random.randint(300, 350)
             self.ball.vy = -random.randint(300, 350) * (-1 if random.randint(0, 1) == 0 else 1)
             self.player_score += 1
