@@ -1,8 +1,4 @@
 import pyglet
-from pyglet.window import key
-from entity import Entity
-import utils
-import random
 from scene import Scene
 
 
