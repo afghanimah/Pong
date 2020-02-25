@@ -12,8 +12,10 @@ class Game(pyglet.window.Window):
             "ball": pyglet.image.load("ball.png")
         }
         self.player = Entity(self.images.get("paddle"), 20, (self.height - self.images.get("paddle").height) / 2, 250)
-        self.cpu = Entity(self.images.get("paddle"), self.width - self.images.get("paddle").width - 20, (self.height - self.images.get("paddle").height) / 2, 250)
-        self.ball = Entity(self.images.get("ball"), (self.width - self.images.get("ball").width) / 2, (self.height - self.images.get("ball").height) / 2, 500)
+        self.cpu = Entity(self.images.get("paddle"), self.width - self.images.get("paddle").width - 20,
+                          (self.height - self.images.get("paddle").height) / 2, 250)
+        self.ball = Entity(self.images.get("ball"), (self.width - self.images.get("ball").width) / 2,
+                           (self.height - self.images.get("ball").height) / 2, 500)
         self.ball.vx = 300
         self.ball.vy = 300
         self.player_score = 0
@@ -25,23 +27,23 @@ class Game(pyglet.window.Window):
                                               y=self.height - 50,
                                               anchor_x='center', anchor_y='center')
         self.colon = pyglet.text.Label(":",
-                                      font_name='Ubuntu',
-                                      font_size=64,
-                                      x=self.width / 2,
-                                      y=self.height - 40,
-                                      anchor_x='center', anchor_y='center')
+                                       font_name='Ubuntu',
+                                       font_size=64,
+                                       x=self.width / 2,
+                                       y=self.height - 40,
+                                       anchor_x='center', anchor_y='center')
         self.cpu_label = pyglet.text.Label(str(self.cpu_score),
-                                              font_name='Ubuntu',
-                                              font_size=64,
-                                              x=2 * self.width / 3,
-                                              y=self.height - 50,
-                                              anchor_x='center', anchor_y='center')
-        self.pause_label = pyglet.text.Label("pause",
                                            font_name='Ubuntu',
                                            font_size=64,
-                                           x=self.width / 2,
-                                           y=self.height / 2,
+                                           x=2 * self.width / 3,
+                                           y=self.height - 50,
                                            anchor_x='center', anchor_y='center')
+        self.pause_label = pyglet.text.Label("pause",
+                                             font_name='Ubuntu',
+                                             font_size=64,
+                                             x=self.width / 2,
+                                             y=self.height / 2,
+                                             anchor_x='center', anchor_y='center')
         self.paused = False
         self.hit_sound = pyglet.media.load("button-10.wav", streaming=False)
         self.point_sound = pyglet.media.load("point.wav", streaming=False)
@@ -50,7 +52,8 @@ class Game(pyglet.window.Window):
         if self.paused:
             return
         self.player.update(dt)
-        self.cpu.follow(self.ball.sprite.x + self.ball.sprite.width / 2, self.ball.sprite.y + self.ball.sprite.height / 2)
+        self.cpu.follow(self.ball.sprite.x + self.ball.sprite.width / 2,
+                        self.ball.sprite.y + self.ball.sprite.height / 2)
         self.cpu.update(dt)
         self.ball.update(dt)
         self.window_bound()
@@ -127,17 +130,13 @@ class Game(pyglet.window.Window):
             self.player_label.text = str(self.player_score)
             self.point_sound.play()
 
-        if (self.ball.sprite.x + self.ball.sprite.width / 2 > self.player.sprite.x + self.player.sprite.width / 2 and
-            self.ball.sprite.x + self.ball.sprite.width / 2 < self.player.sprite.x + self.player.sprite.width and
-            self.ball.sprite.y + self.ball.sprite.height / 2 < self.player.sprite.y + self.player.sprite.height and
-            self.ball.sprite.y + self.ball.sprite.height / 2 > self.player.sprite.y):
+        if (self.player.sprite.x + self.player.sprite.width / 2 < self.ball.sprite.x + self.ball.sprite.width / 2 < self.player.sprite.x + self.player.sprite.width and
+            self.player.sprite.y + self.player.sprite.height > self.ball.sprite.y + self.ball.sprite.height / 2 > self.player.sprite.y):
             self.ball.sprite.x = self.player.sprite.x + self.player.sprite.width
             self.ball.vx *= -1
             self.hit_sound.play()
-        elif (self.ball.sprite.x + self.ball.sprite.width / 2 > self.cpu.sprite.x and
-                self.ball.sprite.x + self.ball.sprite.width / 2 < self.cpu.sprite.x + self.cpu.sprite.width / 2 and
-                self.ball.sprite.y + self.ball.sprite.height / 2 < self.cpu.sprite.y + self.cpu.sprite.height and
-                self.ball.sprite.y + self.ball.sprite.height / 2 > self.cpu.sprite.y):
+        elif (self.cpu.sprite.x < self.ball.sprite.x + self.ball.sprite.width / 2 < self.cpu.sprite.x + self.cpu.sprite.width / 2 and
+            self.cpu.sprite.y + self.cpu.sprite.height > self.ball.sprite.y + self.ball.sprite.height / 2 > self.cpu.sprite.y):
             self.ball.sprite.x = self.cpu.sprite.x - self.ball.sprite.width
             self.ball.vx *= -1
             self.hit_sound.play()
