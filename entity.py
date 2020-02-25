@@ -14,20 +14,12 @@ class Entity:
             self.vy += self.speed
         elif symbol == key.DOWN:
             self.vy -= self.speed
-        # if symbol == key.LEFT:
-        #     self.vx -= self.speed
-        # elif symbol == key.RIGHT:
-        #     self.vx += self.speed
 
     def key_up(self, symbol, modifiers):
         if symbol == key.UP:
             self.vy -= self.speed
         elif symbol == key.DOWN:
             self.vy += self.speed
-        # if symbol == key.LEFT:
-        #     self.vx += self.speed
-        # elif symbol == key.RIGHT:
-        #     self.vx -= self.speed
 
     def follow(self, x, y):
         if self.sprite.y < y:

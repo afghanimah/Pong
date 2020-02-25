@@ -5,6 +5,8 @@ import utils
 import random
 
 
+# PyCharm bug:
+# noinspection PyAbstractClass
 class Game(pyglet.window.Window):
     def __init__(self):
         super(Game, self).__init__()
@@ -72,7 +74,8 @@ class Game(pyglet.window.Window):
     def on_key_release(self, symbol, modifiers):
         self.player.key_up(symbol, modifiers)
 
-    def bound_x(self, e, mini, maxi):
+    @staticmethod
+    def bound_x(e, mini, maxi):
         mini += e.sprite.width / 2
         maxi -= e.sprite.width / 2
         if e.sprite.x < mini:
@@ -80,7 +83,8 @@ class Game(pyglet.window.Window):
         elif e.sprite.x > maxi:
             e.sprite.x = maxi
 
-    def bound_y(self, e, mini, maxi):
+    @staticmethod
+    def bound_y(e, mini, maxi):
         mini += e.sprite.height / 2
         maxi -= e.sprite.height / 2
         if e.sprite.y < mini:
@@ -127,12 +131,12 @@ class Game(pyglet.window.Window):
             self.point_sound.play()
 
         if (self.player.sprite.x < self.ball.sprite.x < self.player.sprite.x + self.paddle_img.anchor_x and
-            self.player.sprite.y - self.paddle_img.anchor_y < self.ball.sprite.y < self.player.sprite.y + self.paddle_img.anchor_y):
+                self.player.sprite.y - self.paddle_img.anchor_y < self.ball.sprite.y < self.player.sprite.y + self.paddle_img.anchor_y):
             self.ball.sprite.x = self.player.sprite.x + self.paddle_img.anchor_x
             self.ball.vx *= -1
             self.hit_sound.play()
         elif (self.cpu.sprite.x < self.ball.sprite.x < self.cpu.sprite.x + self.paddle_img.anchor_x / 2 and
-            self.cpu.sprite.y - self.paddle_img.anchor_y < self.ball.sprite.y < self.cpu.sprite.y + self.paddle_img.anchor_y):
+              self.cpu.sprite.y - self.paddle_img.anchor_y < self.ball.sprite.y < self.cpu.sprite.y + self.paddle_img.anchor_y):
             self.ball.sprite.x = self.cpu.sprite.x - self.ball_img.anchor_x
             self.ball.vx *= -1
             self.hit_sound.play()
