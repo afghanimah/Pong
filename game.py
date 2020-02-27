@@ -1,4 +1,5 @@
 import pyglet
+from pyglet.window import key
 from scene import Scene
 
 
@@ -7,6 +8,8 @@ from scene import Scene
 class Game(pyglet.window.Window):
     def __init__(self):
         super(Game, self).__init__()
+        self.keys = key.KeyStateHandler()
+        self.push_handlers(self.keys)
         self.scene = Scene(self)
 
     def update(self, dt):
