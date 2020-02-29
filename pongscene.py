@@ -2,8 +2,8 @@ import pyglet
 from paddle import Paddle
 from ball import Ball
 from pongcontroller import PongController
-from scene import Scene
-from resourcemanager import ResourceManager
+from pygletplus.scene import Scene
+from pygletplus.resourcemanager import ResourceManager
 
 
 class PongScene(Scene):

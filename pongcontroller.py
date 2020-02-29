@@ -1,6 +1,6 @@
 from pyglet.window import key
 import random
-from controller import Controller
+from pygletplus.controller import Controller
 
 
 class PongController(Controller):

@@ -1,4 +1,4 @@
-from physicalentity import PhysicalEntity
+from pygletplus.physicalentity import PhysicalEntity
 
 
 class Paddle(PhysicalEntity):

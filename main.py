@@ -1,5 +1,5 @@
 import pyglet
-from game import Game
+from pygletplus.game import Game
 from pongscene import PongScene
 
 if __name__ == "__main__":

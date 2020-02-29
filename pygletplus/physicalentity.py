@@ -1,4 +1,4 @@
-from entity import Entity
+from pygletplus.entity import Entity
 
 
 class PhysicalEntity(Entity):
