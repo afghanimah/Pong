@@ -3,10 +3,8 @@ import pyglet
 
 class ResourceManager:
     def __init__(self):
-        self.paddle_img = self.load_image("paddle.png")
-        self.ball_img = self.load_image("ball.png")
-        self.hit_sound = self.load_sound("button-10.wav", streaming=False)
-        self.point_sound = self.load_sound("point.wav", streaming=False)
+        pyglet.resource.path = ['resources/']
+        pyglet.resource.reindex()
 
     @staticmethod
     def load_image(image_name, center=True):
