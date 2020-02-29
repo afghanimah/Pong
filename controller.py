@@ -21,7 +21,7 @@ class Controller:
         self.window_bound()
         self.bounce_ball()
 
-    def on_key_press(self, symbol, modifiers):
+    def on_key_press(self, symbol, _):
         if symbol == key.ESCAPE:
             self.close()
         if symbol == key.SPACE:
@@ -32,7 +32,7 @@ class Controller:
         elif symbol == key.DOWN:
             self.player.vy -= self.player.speed
 
-    def on_key_release(self, symbol, modifiers):
+    def on_key_release(self, symbol, _):
         if symbol == key.UP:
             self.player.vy -= self.player.speed
         elif symbol == key.DOWN:
@@ -95,12 +95,14 @@ class Controller:
             self.scene.point_sound.play()
 
         if (self.player.sprite.x < self.ball.sprite.x < self.player.sprite.x + self.scene.paddle_img.anchor_x and
-                self.player.sprite.y - self.scene.paddle_img.anchor_y < self.ball.sprite.y < self.player.sprite.y + self.scene.paddle_img.anchor_y):
+                self.player.sprite.y - self.scene.paddle_img.anchor_y < self.ball.sprite.y <
+                self.player.sprite.y + self.scene.paddle_img.anchor_y):
             self.ball.sprite.x = self.player.sprite.x + self.scene.paddle_img.anchor_x
             self.ball.vx *= -1
             self.scene.hit_sound.play()
         elif (self.cpu.sprite.x < self.ball.sprite.x < self.cpu.sprite.x + self.scene.paddle_img.anchor_x / 2 and
-              self.cpu.sprite.y - self.scene.paddle_img.anchor_y < self.ball.sprite.y < self.cpu.sprite.y + self.scene.paddle_img.anchor_y):
+              self.cpu.sprite.y - self.scene.paddle_img.anchor_y < self.ball.sprite.y <
+              self.cpu.sprite.y + self.scene.paddle_img.anchor_y):
             self.ball.sprite.x = self.cpu.sprite.x - self.scene.ball_img.anchor_x
             self.ball.vx *= -1
             self.scene.hit_sound.play()
