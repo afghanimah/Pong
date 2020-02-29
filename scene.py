@@ -1,5 +1,6 @@
 import pyglet
-from entity import Entity
+from paddle import Paddle
+from ball import Ball
 import utils
 from controller import Controller
 
@@ -13,11 +14,11 @@ class Scene:
         self.batch = pyglet.graphics.Batch()
         self.paddle_img = utils.load_image("paddle.png")
         self.ball_img = utils.load_image("ball.png")
-        self.player = Entity(self.paddle_img, 20 + self.paddle_img.anchor_x, self.height / 2, 250, self.batch)
-        self.cpu = Entity(self.paddle_img, self.width - self.paddle_img.anchor_x - 20, self.height / 2, 250, self.batch)
-        self.ball = Entity(self.ball_img, self.width / 2, self.height / 2, 500, self.batch)
-        self.ball.vx = 300
-        self.ball.vy = 300
+        self.player = Paddle(self.paddle_img, 20 + self.paddle_img.anchor_x, self.height / 2, 250, self.batch)
+        self.cpu = Paddle(self.paddle_img, self.width - self.paddle_img.anchor_x - 20, self.height / 2, 250, self.batch)
+        self.ball = Ball(self.ball_img, self.width / 2, self.height / 2, 300, self.batch)
+        self.ball.vx = self.ball.speed
+        self.ball.vy = self.ball.speed
         self.player_score = 0
         self.cpu_score = 0
         self.player_label = pyglet.text.Label(str(self.player_score),
