@@ -1,9 +1,7 @@
 import pyglet
-from pyglet.window import key
 from entity import Entity
 import utils
 from controller import Controller
-import random
 
 
 class Scene:

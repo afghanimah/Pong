@@ -1,7 +1,4 @@
-import pyglet
 from pyglet.window import key
-from entity import Entity
-import utils
 import random
 
 
@@ -25,14 +22,21 @@ class Controller:
         self.bounce_ball()
 
     def on_key_press(self, symbol, modifiers):
-        self.player.key_down(symbol, modifiers)
         if symbol == key.ESCAPE:
             self.close()
         if symbol == key.SPACE:
             self.scene.paused = not self.scene.paused
+        # player movement (decouple from player class):
+        if symbol == key.UP:
+            self.player.vy += self.player.speed
+        elif symbol == key.DOWN:
+            self.player.vy -= self.player.speed
 
     def on_key_release(self, symbol, modifiers):
-        self.player.key_up(symbol, modifiers)
+        if symbol == key.UP:
+            self.player.vy -= self.player.speed
+        elif symbol == key.DOWN:
+            self.player.vy += self.player.speed
 
     @staticmethod
     def bound_x(e, mini, maxi):
