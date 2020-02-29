@@ -68,6 +68,7 @@ class Controller:
         y_min = self.scene.ball_img.anchor_y
         y_max = self.scene.height - self.scene.ball_img.anchor_y
 
+        # bounce off top and bottom walls of window
         if self.ball.sprite.y < y_min:
             self.ball.sprite.y = y_min
             self.ball.vy *= -1
@@ -77,6 +78,7 @@ class Controller:
             self.ball.vy *= -1
             self.scene.hit_sound.play()
 
+        # score a point if touch left or right walls of window
         if self.ball.sprite.x < x_min:
             self.ball.sprite.x = self.scene.width / 2 - 200
             self.ball.sprite.y = self.scene.height / 2
@@ -100,7 +102,7 @@ class Controller:
             self.ball.sprite.x = self.player.sprite.x + self.scene.paddle_img.anchor_x
             self.ball.vx *= -1
             self.scene.hit_sound.play()
-        elif (self.cpu.sprite.x < self.ball.sprite.x < self.cpu.sprite.x + self.scene.paddle_img.anchor_x / 2 and
+        elif (self.cpu.sprite.x > self.ball.sprite.x > self.cpu.sprite.x - self.scene.paddle_img.anchor_x and
               self.cpu.sprite.y - self.scene.paddle_img.anchor_y < self.ball.sprite.y <
               self.cpu.sprite.y + self.scene.paddle_img.anchor_y):
             self.ball.sprite.x = self.cpu.sprite.x - self.scene.ball_img.anchor_x

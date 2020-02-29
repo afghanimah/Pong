@@ -8,7 +8,7 @@ from pongresourcemanager import PongResourceManager
 # noinspection PyAbstractClass
 class Game(pyglet.window.Window):
     def __init__(self):
-        super(Game, self).__init__()
+        super().__init__()
         self.resources = PongResourceManager()
         self.keys = key.KeyStateHandler()
         self.push_handlers(self.keys)
