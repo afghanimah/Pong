@@ -1,7 +1,6 @@
 import pyglet
 from paddle import Paddle
 from ball import Ball
-import utils
 from controller import Controller
 
 
@@ -11,9 +10,10 @@ class Scene:
         self.height = game.height
         self.close = game.close
         self.keys = game.keys
+        self.resources = game.resources
         self.batch = pyglet.graphics.Batch()
-        self.paddle_img = utils.load_image("paddle.png")
-        self.ball_img = utils.load_image("ball.png")
+        self.paddle_img = self.resources.paddle_img
+        self.ball_img = self.resources.ball_img
         self.player = Paddle(self.paddle_img, 20 + self.paddle_img.anchor_x, self.height / 2, 250, self.batch)
         self.cpu = Paddle(self.paddle_img, self.width - self.paddle_img.anchor_x - 20, self.height / 2, 250, self.batch)
         self.ball = Ball(self.ball_img, self.width / 2, self.height / 2, 300, self.batch)
@@ -46,8 +46,8 @@ class Scene:
                                              y=self.height / 2,
                                              anchor_x='center', anchor_y='center')
         self.paused = False
-        self.hit_sound = utils.load_sound("button-10.wav", streaming=False)
-        self.point_sound = utils.load_sound("point.wav", streaming=False)
+        self.hit_sound = self.resources.hit_sound
+        self.point_sound = self.resources.point_sound
         self.controller = Controller(self)
 
     def update(self, dt):

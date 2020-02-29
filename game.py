@@ -1,6 +1,7 @@
 import pyglet
 from pyglet.window import key
 from scene import Scene
+from resourcemanager import ResourceManager
 
 
 # PyCharm bug:
@@ -8,6 +9,7 @@ from scene import Scene
 class Game(pyglet.window.Window):
     def __init__(self):
         super(Game, self).__init__()
+        self.resources = ResourceManager()
         self.keys = key.KeyStateHandler()
         self.push_handlers(self.keys)
         self.scene = Scene(self)

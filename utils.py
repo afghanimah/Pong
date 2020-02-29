@@ -2,6 +2,7 @@ import pyglet
 
 
 def load_image(image_name):
+    # resource.image loads into textureatlas by default
     img = pyglet.resource.image(image_name)
     img.anchor_x = img.width // 2
     img.anchor_y = img.height // 2
