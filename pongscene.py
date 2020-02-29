@@ -3,7 +3,7 @@ from paddle import Paddle
 from ball import Ball
 from pongcontroller import PongController
 from scene import Scene
-from pongresourcemanager import PongResourceManager
+from resourcemanager import ResourceManager
 
 
 class PongScene(Scene):
@@ -13,9 +13,9 @@ class PongScene(Scene):
         self.height = game.height
         self.close = game.close
         self.keys = game.keys
-        self.resources = PongResourceManager()
-        self.paddle_img = self.resources.paddle_img
-        self.ball_img = self.resources.ball_img
+        self.resources = ResourceManager()
+        self.paddle_img = self.resources.load_image("paddle")
+        self.ball_img = self.resources.load_image("ball")
         self.player = Paddle(self.paddle_img, 20 + self.paddle_img.anchor_x, self.height / 2, 250, self.batch)
         self.cpu = Paddle(self.paddle_img, self.width - self.paddle_img.anchor_x - 20, self.height / 2, 250, self.batch)
         self.ball = Ball(self.ball_img, self.width / 2, self.height / 2, 300, self.batch)
@@ -48,8 +48,8 @@ class PongScene(Scene):
                                              y=self.height / 2,
                                              anchor_x='center', anchor_y='center')
         self.paused = False
-        self.hit_sound = self.resources.hit_sound
-        self.point_sound = self.resources.point_sound
+        self.hit_sound = self.resources.load_sound("button-10")
+        self.point_sound = self.resources.load_sound("point")
         self.controllers.append(PongController(self))
 
     def draw(self):
