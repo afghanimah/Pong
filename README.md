@@ -8,7 +8,7 @@ After "over engineering" pong, I have developed a pyglet
 extension library of sorts, so you can also use this repo
 to see an example of how the pygletplus package is used with
 a simple game like pong.  The game may be missing some things,
-but it's complete overall and the extension package can be used
+but it's a complete overall and the extension package can be used
 with pyglet to make multi-scene games easier to make.
 
 # pygletplus
