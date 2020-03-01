@@ -48,7 +48,7 @@ class PongScene(Scene):
                                              y=self.height / 2,
                                              anchor_x='center', anchor_y='center')
         self.paused = False
-        self.hit_sound = self.resources.load_sound("button-10")
+        self.bounce_sound = self.resources.load_sound("bounce")
         self.point_sound = self.resources.load_sound("point")
         self.controllers.append(PongController(self))
 

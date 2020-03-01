@@ -73,11 +73,11 @@ class PongController(Controller):
         if self.ball.sprite.y < y_min:
             self.ball.sprite.y = y_min
             self.ball.vy *= -1
-            self.scene.hit_sound.play()
+            self.scene.bounce_sound.play()
         elif self.ball.sprite.y > y_max:
             self.ball.sprite.y = y_max
             self.ball.vy *= -1
-            self.scene.hit_sound.play()
+            self.scene.bounce_sound.play()
 
         # score a point if touch left or right walls of window
         if self.ball.sprite.x < x_min:
@@ -102,10 +102,10 @@ class PongController(Controller):
                 self.player.sprite.y + self.scene.paddle_img.anchor_y):
             self.ball.sprite.x = self.player.sprite.x + self.scene.paddle_img.anchor_x
             self.ball.vx *= -1
-            self.scene.hit_sound.play()
+            self.scene.bounce_sound.play()
         elif (self.cpu.sprite.x > self.ball.sprite.x > self.cpu.sprite.x - self.scene.paddle_img.anchor_x and
               self.cpu.sprite.y - self.scene.paddle_img.anchor_y < self.ball.sprite.y <
               self.cpu.sprite.y + self.scene.paddle_img.anchor_y):
             self.ball.sprite.x = self.cpu.sprite.x - self.scene.ball_img.anchor_x
             self.ball.vx *= -1
-            self.scene.hit_sound.play()
+            self.scene.bounce_sound.play()
